@@ -12,6 +12,7 @@
     "vite": "^4.2.0"
   },
   "dependencies": {
+    "astronomy-engine": "^2.1.17",
     "stats.js": "^0.17.0"
   }
 }

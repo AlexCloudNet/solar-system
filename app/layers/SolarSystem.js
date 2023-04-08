@@ -1,97 +1,104 @@
-import {Astronomy} from "../libs/astronomy";
+// import {Astronomy} from "../libs/astronomy";
+import * as Astronomy from "../../node_modules/astronomy-engine/esm/astronomy"
+
 
 import {
-    SUN_OPTS
+    SUN_OPTS,
+    DELTA_ORBIT_RAD
 } from "../../opts";
 
 import Planet from "../objects/Planet.js";
 
 export default class SolarSystem{
-    planetsCoord = Astronomy.Body;
+
     planetsOpts = [
         {
             name: 'Mercury',
             color: '#bdc3c7',
             size: 2,
             orbitalDistance: 36,
-            x: this.planetsCoord[1].EclipticCartesianCoordinates(Astronomy.DayValue(new Date())).x,
-            y: this.planetsCoord[1].EclipticCartesianCoordinates(Astronomy.DayValue(new Date())).y,
+            x: Astronomy.HelioVector("Mercury", new Date, false).x,
+            y: Astronomy.HelioVector("Mercury", new Date, false).y,
         },
         {
             name: 'Venus',
             color: '#BA8B02',
             size: 4.7,
             orbitalDistance: 50,
-            x: this.planetsCoord[2].EclipticCartesianCoordinates(Astronomy.DayValue(new Date())).x,
-            y: this.planetsCoord[2].EclipticCartesianCoordinates(Astronomy.DayValue(new Date())).y,
+            x: Astronomy.HelioVector("Venus", new Date, false).x,
+            y: Astronomy.HelioVector("Venus", new Date, false).y,
         },
         {
             name: 'Earth',
             color: '#43c6ac',
             size: 5,
             orbitalDistance: 70,
-            x: this.planetsCoord[3].EclipticCartesianCoordinates(Astronomy.DayValue(new Date())).x,
-            y: this.planetsCoord[3].EclipticCartesianCoordinates(Astronomy.DayValue(new Date())).y,
+            x: Astronomy.HelioVector("Earth", new Date, false).x,
+            y: Astronomy.HelioVector("Earth", new Date, false).y,
         },
         {
             name: 'Mars',
             color: '#EB5757',
             size: 2.6,
             orbitalDistance: 90,
-            x: this.planetsCoord[5].EclipticCartesianCoordinates(Astronomy.DayValue(new Date())).x,
-            y: this.planetsCoord[5].EclipticCartesianCoordinates(Astronomy.DayValue(new Date())).y, 
+            x: Astronomy.HelioVector("Mars", new Date, false).x,
+            y: Astronomy.HelioVector("Mars", new Date, false).y,
         },
         {
             name: 'Jupiter',
             color: '#ffd89b',
             size: 15,
             orbitalDistance: 116,
-            x: this.planetsCoord[16].EclipticCartesianCoordinates(Astronomy.DayValue(new Date())).x,
-            y: this.planetsCoord[16].EclipticCartesianCoordinates(Astronomy.DayValue(new Date())).y,
+            x: Astronomy.HelioVector("Jupiter", new Date, false).x,
+            y: Astronomy.HelioVector("Jupiter", new Date, false).y,
         },
         {
             name: 'Saturn',
             color: '#BE985F',
             size: 12,
             orbitalDistance: 156,
-            x: this.planetsCoord[17].EclipticCartesianCoordinates(Astronomy.DayValue(new Date())).x,
-            y: this.planetsCoord[17].EclipticCartesianCoordinates(Astronomy.DayValue(new Date())).y,
+            x: Astronomy.HelioVector("Saturn", new Date, false).x,
+            y: Astronomy.HelioVector("Saturn", new Date, false).y,
         },
         {
             name: 'Uranus',
             color: '#D0F6F8',
             size: 10,
             orbitalDistance: 195,
-            x: this.planetsCoord[18].EclipticCartesianCoordinates(Astronomy.DayValue(new Date())).x,
-            y: this.planetsCoord[18].EclipticCartesianCoordinates(Astronomy.DayValue(new Date())).y,
+            x: Astronomy.HelioVector("Uranus", new Date, false).x,
+            y: Astronomy.HelioVector("Uranus", new Date, false).y,
         },
         {
             name: 'Neptune',
             color: '#344BB2',
             size: 9,
             orbitalDistance: 220,
-            x: this.planetsCoord[19].EclipticCartesianCoordinates(Astronomy.DayValue(new Date())).x,
-            y: this.planetsCoord[19].EclipticCartesianCoordinates(Astronomy.DayValue(new Date())).y,
+            x: Astronomy.HelioVector("Neptune", new Date, false).x,
+            y: Astronomy.HelioVector("Neptune", new Date, false).y,
         },
         {
             name: 'Pluto',
             color: '#41260F',
             size: 1,
             orbitalDistance: 240,
-            x: this.planetsCoord[20].EclipticCartesianCoordinates(Astronomy.DayValue(new Date())).x,
-            y: this.planetsCoord[20].EclipticCartesianCoordinates(Astronomy.DayValue(new Date())).y,
+            x: Astronomy.HelioVector("Pluto", new Date, false).x,
+            y: Astronomy.HelioVector("Pluto", new Date, false).y,
         },
         
         
     ];
 
+
     constructor(ctx){
         this.ctx = ctx;
-        this.DELTA_ORBIT_RAD = 150;
+        this.DELTA_ORBIT_RAD = DELTA_ORBIT_RAD;
         this.BIG_ORBIT_FLAG = 1;
 
         this.planetsArr = this.get_planets_opts();
         window.addEventListener('wheel', this.scrollResize.bind(this));
+
+        console.log(Astronomy.HelioVector("Mars", new Date, false))
+
     }
 
 

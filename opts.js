@@ -1,7 +1,7 @@
 // Solar system properties
 const SUN_OPTS = {
-    x: 500,
-    y: 500,
+    x: 400,
+    y: 380,
     rad: 15,
 }
 let BIG_ORBIT_FLAG = 1;

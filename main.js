@@ -53,6 +53,5 @@ function mouseScrollIcon(){
     setTimeout(()=>{
         scrollIcon.style.display = "none";
     }, 2000);
-    console.log(this);
     window.removeEventListener('wheel', mouseScrollIcon);
 }

@@ -43,6 +43,8 @@ export default class Planet {
     }
 
     render_orbit(){
+        if(this.orbit == false) return this;
+        
         this.ctx.save();
         this.ctx.beginPath();
         // this.ctx.setLineDash([2, 2]);

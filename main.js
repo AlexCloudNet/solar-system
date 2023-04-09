@@ -31,8 +31,8 @@ function draw(){
     stats.begin();
     ctx.clearRect(0, 0, w, h);
 
-    solar_system.render();
     sun.render();
+    solar_system.render();
 
     stats.end();
     requestAnimationFrame(draw);

@@ -17,32 +17,40 @@ export default class SolarSystem{
             color: '#bdc3c7',
             size: 2,
             orbitalDistance: 36,
-            x: Astronomy.HelioVector("Mercury", new Date, false).x,
-            y: Astronomy.HelioVector("Mercury", new Date, false).y,
+            // x: Astronomy.HelioVector("Mercury", new Date, false).x,
+            // y: Astronomy.HelioVector("Mercury", new Date, false).y,
+            x: Astronomy.BaryState("Mercury", new Date()).x,
+            y: Astronomy.BaryState("Mercury", new Date()).y,
         },
         {
             name: 'Venus',
             color: '#BA8B02',
             size: 4.7,
             orbitalDistance: 50,
-            x: Astronomy.HelioVector("Venus", new Date, false).x,
-            y: Astronomy.HelioVector("Venus", new Date, false).y,
+            // x: Astronomy.HelioVector("Venus", new Date, false).x,
+            // y: Astronomy.HelioVector("Venus", new Date, false).y,
+            x: Astronomy.BaryState("Venus", new Date()).x,
+            y: Astronomy.BaryState("Venus", new Date()).y,
         },
         {
             name: 'Earth',
             color: '#43c6ac',
             size: 5,
             orbitalDistance: 70,
-            x: Astronomy.HelioVector("Earth", new Date, false).x,
-            y: Astronomy.HelioVector("Earth", new Date, false).y,
+            // x: Astronomy.HelioVector("Earth", new Date, false).x,
+            // y: Astronomy.HelioVector("Earth", new Date, false).y,
+            x: Astronomy.BaryState("Earth", new Date()).x,
+            y: Astronomy.BaryState("Earth", new Date()).y,
         },
         {
             name: 'Mars',
             color: '#EB5757',
             size: 2.6,
             orbitalDistance: 90,
-            x: Astronomy.HelioVector("Mars", new Date, false).x,
-            y: Astronomy.HelioVector("Mars", new Date, false).y,
+            // x: Astronomy.HelioVector("Mars", new Date, false).x,
+            // y: Astronomy.HelioVector("Mars", new Date, false).y,
+            x: Astronomy.BaryState("Mars", new Date()).x,
+            y: Astronomy.BaryState("Mars", new Date()).y,
         },
         {
             name: 'Jupiter',
@@ -84,6 +92,24 @@ export default class SolarSystem{
             x: Astronomy.HelioVector("Pluto", new Date, false).x,
             y: Astronomy.HelioVector("Pluto", new Date, false).y,
         },
+        {
+            name: 'SSB',
+            color: '#FFFFFF',
+            size: 1,
+            orbit: false,
+            orbitalDistance: 1,
+            x: Astronomy.HelioVector("SSB", new Date, false).x,
+            y: Astronomy.HelioVector("SSB", new Date, false).y,
+        },
+        {
+            name: 'EMB',
+            color: '#FFFFFF',
+            size: 1,
+            orbit: false,
+            orbitalDistance: 1,
+            x: Astronomy.HelioVector("EMB", new Date, false).x,
+            y: Astronomy.HelioVector("EMB", new Date, false).y,
+        },
         
         
     ];
@@ -97,10 +123,18 @@ export default class SolarSystem{
         this.planetsArr = this.get_planets_opts();
         window.addEventListener('wheel', this.scrollResize.bind(this));
 
-        console.log(Astronomy.HelioVector("Mars", new Date, false))
+        // console.log(Astronomy.HelioVector("Mars", new Date, false))
+        console.log(Astronomy.HelioVector("Mars", new Date, false));
+        console.log( Astronomy.BaryState("Mars", new Date()) );
+        console.log(Astronomy.HelioVector("SSB", new Date, false));
+        console.log(Astronomy.Body);
+
 
     }
 
+    get_planet_vector(){
+
+    }
 
     get_planets_opts(){
         let planetsArr = [];
@@ -116,7 +150,7 @@ export default class SolarSystem{
                         name: elem.name,
                         color: elem.color,
                         rad: elem.size,
-                        orbit: Math.hypot(catX, catY),
+                        orbit: !elem.orbit ? Math.hypot(catX, catY) : elem.orbit,
                         ctx: this.ctx,
                         BIG_ORBIT_FLAG: this.BIG_ORBIT_FLAG,
                     }

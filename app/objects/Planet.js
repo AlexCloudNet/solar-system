@@ -11,6 +11,12 @@ export default class Planet {
         this.name = opts.name;
 
         this.BIG_ORBIT_FLAG = opts.BIG_ORBIT_FLAG;
+
+        this.apsis_x = opts.apsis_x || false;
+        this.apsis_y = opts.apsis_y || false;
+
+        this.next_apsis_x = opts.next_apsis_x || false;
+        this.next_apsis_y = opts.next_apsis_y || false;
     }
 
     render_planet(){
@@ -40,6 +46,32 @@ export default class Planet {
                 this.ctx.restore();
         }
 
+    }
+    render_apsis(){
+        if(this.apsis_x != false){
+                this.ctx.save();
+                this.ctx.beginPath();
+                this.ctx.arc(this.apsis_x, this.apsis_y, this.rad, 0, 2*Math.PI, true);
+                this.ctx.fillStyle = this.color;
+                this.ctx.lineWidth = 5;
+                this.ctx.strokeStyle = this.color;
+                this.ctx.fill();
+                this.ctx.stroke();
+                this.ctx.closePath();
+                this.ctx.restore();
+
+                this.ctx.save();
+                this.ctx.beginPath();
+                this.ctx.arc(this.next_apsis_x, this.next_apsis_y, this.rad, 0, 2*Math.PI, true);
+                this.ctx.fillStyle = this.color;
+                this.ctx.lineWidth = 5;
+                this.ctx.strokeStyle = this.color;
+                this.ctx.fill();
+                this.ctx.stroke();
+                this.ctx.closePath();
+                this.ctx.restore();
+        }
+        
     }
 
     render_orbit(){

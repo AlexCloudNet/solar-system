@@ -19,8 +19,12 @@ export default class SolarSystem{
             orbitalDistance: 36,
             // x: Astronomy.HelioVector("Mercury", new Date, false).x,
             // y: Astronomy.HelioVector("Mercury", new Date, false).y,
-            x: Astronomy.BaryState("Mercury", new Date()).x,
-            y: Astronomy.BaryState("Mercury", new Date()).y,
+            x: Astronomy.HelioVector("Mercury", new Date()).x,
+            y: Astronomy.HelioVector("Mercury", new Date()).y,
+            apsis_x: Astronomy.HelioVector("Mercury", Astronomy.SearchPlanetApsis('Mercury', new Date).time).x,
+            apsis_y: Astronomy.HelioVector("Mercury", Astronomy.SearchPlanetApsis('Mercury', new Date).time).y,
+            next_apsis_x: Astronomy.HelioVector("Mercury", Astronomy.NextPlanetApsis('Mercury', Astronomy.SearchPlanetApsis('Mercury', new Date)).time).x,
+            next_apsis_y: Astronomy.HelioVector("Mercury", Astronomy.NextPlanetApsis('Mercury', Astronomy.SearchPlanetApsis('Mercury', new Date)).time).y,
         },
         {
             name: 'Venus',
@@ -31,6 +35,10 @@ export default class SolarSystem{
             // y: Astronomy.HelioVector("Venus", new Date, false).y,
             x: Astronomy.BaryState("Venus", new Date()).x,
             y: Astronomy.BaryState("Venus", new Date()).y,
+            apsis_x: Astronomy.BaryState("Venus", Astronomy.SearchPlanetApsis('Venus', new Date).time).x,
+            apsis_y: Astronomy.BaryState("Venus", Astronomy.SearchPlanetApsis('Venus', new Date).time).y,
+            next_apsis_x: Astronomy.BaryState("Venus", Astronomy.NextPlanetApsis('Venus', Astronomy.SearchPlanetApsis('Venus', new Date)).time).x,
+            next_apsis_y: Astronomy.BaryState("Venus", Astronomy.NextPlanetApsis('Venus', Astronomy.SearchPlanetApsis('Venus', new Date)).time).y,
         },
         {
             name: 'Earth',
@@ -51,6 +59,11 @@ export default class SolarSystem{
             // y: Astronomy.HelioVector("Mars", new Date, false).y,
             x: Astronomy.BaryState("Mars", new Date()).x,
             y: Astronomy.BaryState("Mars", new Date()).y,
+            apsis_x: Astronomy.BaryState("Mars", Astronomy.SearchPlanetApsis('Mars', new Date).time).x,
+            apsis_y: Astronomy.BaryState("Mars", Astronomy.SearchPlanetApsis('Mars', new Date).time).y,
+            next_apsis_x: Astronomy.BaryState("Mars", Astronomy.NextPlanetApsis('Mars', Astronomy.SearchPlanetApsis('Mars', new Date)).time).x,
+            next_apsis_y: Astronomy.BaryState("Mars", Astronomy.NextPlanetApsis('Mars', Astronomy.SearchPlanetApsis('Mars', new Date)).time).y,
+
         },
         {
             name: 'Jupiter',
@@ -98,18 +111,18 @@ export default class SolarSystem{
             size: 1,
             orbit: false,
             orbitalDistance: 1,
-            x: Astronomy.HelioVector("SSB", new Date, false).x,
-            y: Astronomy.HelioVector("SSB", new Date, false).y,
+            x: Astronomy.HelioState("SSB", new Date, false).x,
+            y: Astronomy.HelioState("SSB", new Date, false).y,
         },
-        {
-            name: 'EMB',
-            color: '#FFFFFF',
-            size: 1,
-            orbit: false,
-            orbitalDistance: 1,
-            x: Astronomy.HelioVector("EMB", new Date, false).x,
-            y: Astronomy.HelioVector("EMB", new Date, false).y,
-        },
+        // {
+        //     name: 'EMB',
+        //     color: '#FFFFFF',
+        //     size: 1,
+        //     orbit: false,
+        //     orbitalDistance: 1,
+        //     x: Astronomy.HelioVector("EMB", new Date, false).x,
+        //     y: Astronomy.HelioVector("EMB", new Date, false).y,
+        // },
         
         
     ];
@@ -122,12 +135,37 @@ export default class SolarSystem{
 
         this.planetsArr = this.get_planets_opts();
         window.addEventListener('wheel', this.scrollResize.bind(this));
+        
+        // window.addEventListener('mousemove', this.moveScreen.bind(this));
+        // window.addEventListener('mouseup', this.moveScreen.bind(this));
+
+
 
         // console.log(Astronomy.HelioVector("Mars", new Date, false))
-        console.log(Astronomy.HelioVector("Mars", new Date, false));
-        console.log( Astronomy.BaryState("Mars", new Date()) );
-        console.log(Astronomy.HelioVector("SSB", new Date, false));
-        console.log(Astronomy.Body);
+        // console.log(Astronomy.HelioVector("Mars", new Date, false));
+        // console.log( Astronomy.BaryState("Mars", new Date()) );
+        // console.log(Astronomy.BaryState("Sun", new Date, false));
+        // console.log(Astronomy.HelioVector("SSB", new Date, false));
+        // console.log(Astronomy.SearchPlanetApsis('Mars', new Date));
+
+        //Апоцентр и перицентр
+        console.log(
+            Astronomy.BaryState('Mars', Astronomy.SearchPlanetApsis('Mars', new Date).time),
+            Astronomy.BaryState("Mars", Astronomy.NextPlanetApsis('Mars', Astronomy.SearchPlanetApsis('Mars', new Date)).time)
+            );
+        this.apsis_0 = Astronomy.BaryState('Mars', Astronomy.SearchPlanetApsis('Mars', new Date).time);
+        this.apsis_1 = Astronomy.BaryState("Mars", Astronomy.NextPlanetApsis('Mars', Astronomy.SearchPlanetApsis('Mars', new Date)).time);
+        this.lenght_0 = Math.hypot(this.apsis_0.x, this.apsis_0.y, this.apsis_0.z);
+        this.lenght_1 = Math.hypot(this.apsis_1.x, this.apsis_1.y, this.apsis_1.z);
+
+        this.center = (this.lenght_0 + this.lenght_1) / 2;
+
+        // this.orbit_rad = Math.hypot()
+        //     console.log(
+        //         Astronomy.NextPlanetApsis('Mars', Astronomy.NextPlanetApsis('Mars', Astronomy.SearchPlanetApsis('Mars', new Date) ) )
+        //         );
+
+        // console.log(Astronomy.HelioVector("Mars", Astronomy.SearchPlanetApsis('Mars', new Date).time));
 
 
     }
@@ -153,6 +191,13 @@ export default class SolarSystem{
                         orbit: !elem.orbit ? Math.hypot(catX, catY) : elem.orbit,
                         ctx: this.ctx,
                         BIG_ORBIT_FLAG: this.BIG_ORBIT_FLAG,
+
+                        apsis_x: elem.apsis_x * this.DELTA_ORBIT_RAD + SUN_OPTS.x || false,
+                        apsis_y: elem.apsis_y * this.DELTA_ORBIT_RAD + SUN_OPTS.y || false,
+                        next_apsis_x: elem.next_apsis_x * this.DELTA_ORBIT_RAD + SUN_OPTS.x || false,
+                        next_apsis_y: elem.next_apsis_y * this.DELTA_ORBIT_RAD + SUN_OPTS.x || false,
+
+                        center: this.center || false
                     }
                 )
             );
@@ -165,6 +210,7 @@ export default class SolarSystem{
     render(){
         this.planetsArr.forEach(planet => {
             planet.render_planet();
+            planet.render_apsis();
             planet.render_orbit();
             planet.render_name();
         })
@@ -207,5 +253,6 @@ export default class SolarSystem{
         this.planetsArr = this.get_planets_opts();
     }
 
+    
 
 }

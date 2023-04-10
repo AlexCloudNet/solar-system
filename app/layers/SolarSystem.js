@@ -1,5 +1,6 @@
 // import {Astronomy} from "../libs/astronomy";
-import * as Astronomy from "../../node_modules/astronomy-engine/esm/astronomy"
+// import * as Astronomy from "../../node_modules/astronomy-engine/esm/astronomy"
+import {HelioVector} from "../../node_modules/astronomy-engine/esm/astronomy";
 
 
 import {
@@ -17,72 +18,72 @@ export default class SolarSystem{
             color: '#bdc3c7',
             size: 2,
             orbitalDistance: 36,
-            x: Astronomy.HelioVector("Mercury", new Date, false).x,
-            y: Astronomy.HelioVector("Mercury", new Date, false).y,
+            x: HelioVector("Mercury", new Date).x,
+            y: HelioVector("Mercury", new Date).y,
         },
         {
             name: 'Venus',
             color: '#BA8B02',
             size: 4.7,
             orbitalDistance: 50,
-            x: Astronomy.HelioVector("Venus", new Date, false).x,
-            y: Astronomy.HelioVector("Venus", new Date, false).y,
+            x: HelioVector("Venus", new Date).x,
+            y: HelioVector("Venus", new Date).y,
         },
         {
             name: 'Earth',
             color: '#43c6ac',
             size: 5,
             orbitalDistance: 70,
-            x: Astronomy.HelioVector("Earth", new Date, false).x,
-            y: Astronomy.HelioVector("Earth", new Date, false).y,
+            x: HelioVector("Earth", new Date).x,
+            y: HelioVector("Earth", new Date).y,
         },
         {
             name: 'Mars',
             color: '#EB5757',
             size: 2.6,
             orbitalDistance: 90,
-            x: Astronomy.HelioVector("Mars", new Date, false).x,
-            y: Astronomy.HelioVector("Mars", new Date, false).y,
+            x: HelioVector("Mars", new Date).x,
+            y: HelioVector("Mars", new Date).y,
         },
         {
             name: 'Jupiter',
             color: '#ffd89b',
             size: 15,
             orbitalDistance: 116,
-            x: Astronomy.HelioVector("Jupiter", new Date, false).x,
-            y: Astronomy.HelioVector("Jupiter", new Date, false).y,
+            x: HelioVector("Jupiter", new Date).x,
+            y: HelioVector("Jupiter", new Date).y,
         },
         {
             name: 'Saturn',
             color: '#BE985F',
             size: 12,
             orbitalDistance: 156,
-            x: Astronomy.HelioVector("Saturn", new Date, false).x,
-            y: Astronomy.HelioVector("Saturn", new Date, false).y,
+            x: HelioVector("Saturn", new Date).x,
+            y: HelioVector("Saturn", new Date).y,
         },
         {
             name: 'Uranus',
             color: '#D0F6F8',
             size: 10,
             orbitalDistance: 195,
-            x: Astronomy.HelioVector("Uranus", new Date, false).x,
-            y: Astronomy.HelioVector("Uranus", new Date, false).y,
+            x: HelioVector("Uranus", new Date).x,
+            y: HelioVector("Uranus", new Date).y,
         },
         {
             name: 'Neptune',
             color: '#344BB2',
             size: 9,
             orbitalDistance: 220,
-            x: Astronomy.HelioVector("Neptune", new Date, false).x,
-            y: Astronomy.HelioVector("Neptune", new Date, false).y,
+            x: HelioVector("Neptune", new Date).x,
+            y: HelioVector("Neptune", new Date).y,
         },
         {
             name: 'Pluto',
             color: '#41260F',
             size: 1,
             orbitalDistance: 240,
-            x: Astronomy.HelioVector("Pluto", new Date, false).x,
-            y: Astronomy.HelioVector("Pluto", new Date, false).y,
+            x: HelioVector("Pluto", new Date).x,
+            y: HelioVector("Pluto", new Date).y,
         },
         
         
@@ -96,8 +97,6 @@ export default class SolarSystem{
 
         this.planetsArr = this.get_planets_opts();
         window.addEventListener('wheel', this.scrollResize.bind(this));
-
-        console.log(Astronomy.HelioVector("Mars", new Date, false))
 
     }
 

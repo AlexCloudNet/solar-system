@@ -1,6 +1,6 @@
 // import {Astronomy} from "../libs/astronomy";
-// import * as Astronomy from "../../node_modules/astronomy-engine/esm/astronomy"
-import {HelioVector} from "../../node_modules/astronomy-engine/esm/astronomy";
+import * as Astronomy from "../../node_modules/astronomy-engine/esm/astronomy"
+// import {HelioVector} from "../../node_modules/astronomy-engine/esm/astronomy";
 
 
 import {
@@ -18,72 +18,72 @@ export default class SolarSystem{
             color: '#bdc3c7',
             size: 2,
             orbitalDistance: 36,
-            x: HelioVector("Mercury", new Date).x,
-            y: HelioVector("Mercury", new Date).y,
+            x: Astronomy.HelioVector("Mercury", new Date).x,
+            y: Astronomy.HelioVector("Mercury", new Date).y,
         },
         {
             name: 'Venus',
             color: '#BA8B02',
             size: 4.7,
             orbitalDistance: 50,
-            x: HelioVector("Venus", new Date).x,
-            y: HelioVector("Venus", new Date).y,
+            x: Astronomy.HelioVector("Venus", new Date).x,
+            y: Astronomy.HelioVector("Venus", new Date).y,
         },
         {
             name: 'Earth',
             color: '#43c6ac',
             size: 5,
             orbitalDistance: 70,
-            x: HelioVector("Earth", new Date).x,
-            y: HelioVector("Earth", new Date).y,
+            x: Astronomy.HelioVector("Earth", new Date).x,
+            y: Astronomy.HelioVector("Earth", new Date).y,
         },
         {
             name: 'Mars',
             color: '#EB5757',
             size: 2.6,
             orbitalDistance: 90,
-            x: HelioVector("Mars", new Date).x,
-            y: HelioVector("Mars", new Date).y,
+            x: Astronomy.HelioVector("Mars", new Date).x,
+            y: Astronomy.HelioVector("Mars", new Date).y,
         },
         {
             name: 'Jupiter',
             color: '#ffd89b',
             size: 15,
             orbitalDistance: 116,
-            x: HelioVector("Jupiter", new Date).x,
-            y: HelioVector("Jupiter", new Date).y,
+            x: Astronomy.HelioVector("Jupiter", new Date).x,
+            y: Astronomy.HelioVector("Jupiter", new Date).y,
         },
         {
             name: 'Saturn',
             color: '#BE985F',
             size: 12,
             orbitalDistance: 156,
-            x: HelioVector("Saturn", new Date).x,
-            y: HelioVector("Saturn", new Date).y,
+            x: Astronomy.HelioVector("Saturn", new Date).x,
+            y: Astronomy.HelioVector("Saturn", new Date).y,
         },
         {
             name: 'Uranus',
             color: '#D0F6F8',
             size: 10,
             orbitalDistance: 195,
-            x: HelioVector("Uranus", new Date).x,
-            y: HelioVector("Uranus", new Date).y,
+            x: Astronomy.HelioVector("Uranus", new Date).x,
+            y: Astronomy.HelioVector("Uranus", new Date).y,
         },
         {
             name: 'Neptune',
             color: '#344BB2',
             size: 9,
             orbitalDistance: 220,
-            x: HelioVector("Neptune", new Date).x,
-            y: HelioVector("Neptune", new Date).y,
+            x: Astronomy.HelioVector("Neptune", new Date).x,
+            y: Astronomy.HelioVector("Neptune", new Date).y,
         },
         {
             name: 'Pluto',
             color: '#41260F',
             size: 1,
             orbitalDistance: 240,
-            x: HelioVector("Pluto", new Date).x,
-            y: HelioVector("Pluto", new Date).y,
+            x: Astronomy.HelioVector("Pluto", new Date).x,
+            y: Astronomy.HelioVector("Pluto", new Date).y,
         },
         
         

@@ -17,6 +17,10 @@ export default class Planet {
 
         this.next_apsis_x = opts.next_apsis_x || false;
         this.next_apsis_y = opts.next_apsis_y || false;
+
+        this.orbit_props = this.get_orbit();
+
+        console.log(this.orbit_props)
     }
 
     render_planet(){
@@ -48,28 +52,30 @@ export default class Planet {
 
     }
     render_apsis(){
-        if(this.apsis_x != false){
-                this.ctx.save();
-                this.ctx.beginPath();
-                this.ctx.arc(this.apsis_x, this.apsis_y, this.rad, 0, 2*Math.PI, true);
-                this.ctx.fillStyle = this.color;
-                this.ctx.lineWidth = 5;
-                this.ctx.strokeStyle = this.color;
-                this.ctx.fill();
-                this.ctx.stroke();
-                this.ctx.closePath();
-                this.ctx.restore();
+        if(this.BIG_ORBIT_FLAG){
+            if(this.apsis_x != false){
+                    this.ctx.save();
+                    this.ctx.beginPath();
+                    this.ctx.arc(this.apsis_x, this.apsis_y, this.rad+2, 0, 2*Math.PI, true);
+                    this.ctx.fillStyle = this.color;
+                    this.ctx.lineWidth = 1;
+                    this.ctx.strokeStyle = this.color;
+                    // this.ctx.fill();
+                    this.ctx.stroke();
+                    this.ctx.closePath();
+                    this.ctx.restore();
 
-                this.ctx.save();
-                this.ctx.beginPath();
-                this.ctx.arc(this.next_apsis_x, this.next_apsis_y, this.rad, 0, 2*Math.PI, true);
-                this.ctx.fillStyle = this.color;
-                this.ctx.lineWidth = 5;
-                this.ctx.strokeStyle = this.color;
-                this.ctx.fill();
-                this.ctx.stroke();
-                this.ctx.closePath();
-                this.ctx.restore();
+                    this.ctx.save();
+                    this.ctx.beginPath();
+                    this.ctx.arc(this.next_apsis_x, this.next_apsis_y, this.rad+2, 0, 2*Math.PI, true);
+                    this.ctx.fillStyle = this.color;
+                    this.ctx.lineWidth = 1;
+                    this.ctx.strokeStyle = this.color;
+                    // this.ctx.fill();
+                    this.ctx.stroke();
+                    this.ctx.closePath();
+                    this.ctx.restore();
+            }
         }
         
     }
@@ -80,7 +86,9 @@ export default class Planet {
         this.ctx.save();
         this.ctx.beginPath();
         // this.ctx.setLineDash([2, 2]);
-        this.ctx.arc(SUN_OPTS.x, SUN_OPTS.y, this.orbit, 0, 2*Math.PI, false);
+        // this.ctx.arc(SUN_OPTS.x, SUN_OPTS.y, this.orbit, 0, 2*Math.PI, false);
+        this.ctx.arc(this.orbit_props.x, this.orbit_props.y, this.orbit_props.rad, 0, 2*Math.PI, false);
+
         this.ctx.lineWidth = 2;
         this.ctx.strokeStyle = this.color;
         this.ctx.stroke();
@@ -106,5 +114,24 @@ export default class Planet {
         }
     }
 
+    get_orbit(){
+        let cat_a = this.next_apsis_x - this.apsis_x,
+            cat_b = this.next_apsis_y - this.apsis_y,
+            hypot_c = Math.hypot(cat_a, cat_b);
+        
+        let rad = hypot_c/2,
+            angle = cat_b/hypot_c,
+            center_x = this.apsis_x + rad * Math.cos(angle),
+            center_Y = this.apsis_y + rad * Math.sin(angle);
+
+
+
+        return {
+            x: center_x, 
+            y: center_Y,
+            rad,
+            angle: angle * (180 / Math.PI),
+        };
+    }
 
 }

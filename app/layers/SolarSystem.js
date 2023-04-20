@@ -17,8 +17,6 @@ export default class SolarSystem{
             color: '#bdc3c7',
             size: 2,
             orbitalDistance: 36,
-            // x: Astronomy.HelioVector("Mercury", new Date, false).x,
-            // y: Astronomy.HelioVector("Mercury", new Date, false).y,
             x: Astronomy.HelioVector("Mercury", new Date()).x,
             y: Astronomy.HelioVector("Mercury", new Date()).y,
             apsis_x: Astronomy.HelioVector("Mercury", Astronomy.SearchPlanetApsis('Mercury', new Date).time).x,
@@ -31,8 +29,6 @@ export default class SolarSystem{
             color: '#BA8B02',
             size: 4.7,
             orbitalDistance: 50,
-            // x: Astronomy.HelioVector("Venus", new Date, false).x,
-            // y: Astronomy.HelioVector("Venus", new Date, false).y,
             x: Astronomy.BaryState("Venus", new Date()).x,
             y: Astronomy.BaryState("Venus", new Date()).y,
             apsis_x: Astronomy.BaryState("Venus", Astronomy.SearchPlanetApsis('Venus', new Date).time).x,
@@ -45,18 +41,19 @@ export default class SolarSystem{
             color: '#43c6ac',
             size: 5,
             orbitalDistance: 70,
-            // x: Astronomy.HelioVector("Earth", new Date, false).x,
-            // y: Astronomy.HelioVector("Earth", new Date, false).y,
             x: Astronomy.BaryState("Earth", new Date()).x,
             y: Astronomy.BaryState("Earth", new Date()).y,
+            apsis_x: Astronomy.BaryState("Earth", Astronomy.SearchPlanetApsis('Earth', new Date).time).x,
+            apsis_y: Astronomy.BaryState("Earth", Astronomy.SearchPlanetApsis('Earth', new Date).time).y,
+            next_apsis_x: Astronomy.BaryState("Earth", Astronomy.NextPlanetApsis('Earth', Astronomy.SearchPlanetApsis('Earth', new Date)).time).x,
+            next_apsis_y: Astronomy.BaryState("Earth", Astronomy.NextPlanetApsis('Earth', Astronomy.SearchPlanetApsis('Earth', new Date)).time).y,
+
         },
         {
             name: 'Mars',
             color: '#EB5757',
             size: 2.6,
             orbitalDistance: 90,
-            // x: Astronomy.HelioVector("Mars", new Date, false).x,
-            // y: Astronomy.HelioVector("Mars", new Date, false).y,
             x: Astronomy.BaryState("Mars", new Date()).x,
             y: Astronomy.BaryState("Mars", new Date()).y,
             apsis_x: Astronomy.BaryState("Mars", Astronomy.SearchPlanetApsis('Mars', new Date).time).x,
@@ -138,10 +135,8 @@ export default class SolarSystem{
         
         // window.addEventListener('mousemove', this.moveScreen.bind(this));
         // window.addEventListener('mouseup', this.moveScreen.bind(this));
-
-
-
-        // console.log(Astronomy.HelioVector("Mars", new Date, false))
+        // расстояние до солнца в ае
+        // console.log(Astronomy.HelioVector("Mars", new Date).Length()*150)
         // console.log(Astronomy.HelioVector("Mars", new Date, false));
         // console.log( Astronomy.BaryState("Mars", new Date()) );
         // console.log(Astronomy.BaryState("Sun", new Date, false));
@@ -149,10 +144,10 @@ export default class SolarSystem{
         // console.log(Astronomy.SearchPlanetApsis('Mars', new Date));
 
         //Апоцентр и перицентр
-        console.log(
-            Astronomy.BaryState('Mars', Astronomy.SearchPlanetApsis('Mars', new Date).time),
-            Astronomy.BaryState("Mars", Astronomy.NextPlanetApsis('Mars', Astronomy.SearchPlanetApsis('Mars', new Date)).time)
-            );
+        // console.log(
+        //     Astronomy.BaryState('Mars', Astronomy.SearchPlanetApsis('Mars', new Date).time),
+        //     Astronomy.BaryState("Mars", Astronomy.NextPlanetApsis('Mars', Astronomy.SearchPlanetApsis('Mars', new Date)).time)
+        //     );
         this.apsis_0 = Astronomy.BaryState('Mars', Astronomy.SearchPlanetApsis('Mars', new Date).time);
         this.apsis_1 = Astronomy.BaryState("Mars", Astronomy.NextPlanetApsis('Mars', Astronomy.SearchPlanetApsis('Mars', new Date)).time);
         this.lenght_0 = Math.hypot(this.apsis_0.x, this.apsis_0.y, this.apsis_0.z);

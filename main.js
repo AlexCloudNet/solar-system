@@ -14,8 +14,8 @@ let ctx = canvas.getContext('2d');
 const canvas_stars = document.getElementById('stars');
 let ctx_s = canvas_stars.getContext('2d');
 
-let w = canvas.width = window.innerWidth*2,
-    h = canvas.height = window.innerHeight*2;
+let w = canvas.width = window.innerWidth,
+    h = canvas.height = window.innerHeight;
 
     canvas_stars.width = window.innerWidth;
     canvas_stars.height = window.innerHeight;
@@ -50,7 +50,7 @@ stars_fields.render();
 })
 
 
-
+/*
 canvas.onmousedown = function(event){
 
     canvas.style.position = 'absolute';
@@ -75,7 +75,7 @@ canvas.onmousedown = function(event){
         canvas.onmouseup = null;
       };
 }
-
+*/
 
 
 // let scrollIcon = document.querySelector('.mouse');

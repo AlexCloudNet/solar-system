@@ -23,44 +23,112 @@ export default class SolarSystem{
             apsis_y: Astronomy.HelioVector("Mercury", Astronomy.SearchPlanetApsis('Mercury', new Date).time).y,
             next_apsis_x: Astronomy.HelioVector("Mercury", Astronomy.NextPlanetApsis('Mercury', Astronomy.SearchPlanetApsis('Mercury', new Date)).time).x,
             next_apsis_y: Astronomy.HelioVector("Mercury", Astronomy.NextPlanetApsis('Mercury', Astronomy.SearchPlanetApsis('Mercury', new Date)).time).y,
+            apsis: ()=>{
+                let apsis = Astronomy.SearchPlanetApsis('Mercury', new Date),
+                    next_apsis = Astronomy.NextPlanetApsis('Mercury', Astronomy.SearchPlanetApsis('Mercury', new Date));
+
+                return {
+                    [apsis.kind]: {
+                        x: Astronomy.HelioVector("Mercury", apsis.time).x * this.DELTA_ORBIT_RAD + SUN_OPTS.x,
+                        y: Astronomy.HelioVector("Mercury", apsis.time).y * this.DELTA_ORBIT_RAD + SUN_OPTS.y,
+                        dist_au: apsis.dist_au * this.DELTA_ORBIT_RAD,
+                    },
+                    [next_apsis.kind]: {
+                        x: Astronomy.HelioVector("Mercury", next_apsis.time).x * this.DELTA_ORBIT_RAD + SUN_OPTS.x,
+                        y: Astronomy.HelioVector("Mercury", next_apsis.time).y * this.DELTA_ORBIT_RAD + SUN_OPTS.y,
+                        dist_au: next_apsis.dist_au * this.DELTA_ORBIT_RAD,
+                    },
+                }
+            }
+            
         },
         {
             name: 'Venus',
             color: '#BA8B02',
             size: 4.7,
             orbitalDistance: 50,
-            x: Astronomy.BaryState("Venus", new Date()).x,
-            y: Astronomy.BaryState("Venus", new Date()).y,
-            apsis_x: Astronomy.BaryState("Venus", Astronomy.SearchPlanetApsis('Venus', new Date).time).x,
-            apsis_y: Astronomy.BaryState("Venus", Astronomy.SearchPlanetApsis('Venus', new Date).time).y,
-            next_apsis_x: Astronomy.BaryState("Venus", Astronomy.NextPlanetApsis('Venus', Astronomy.SearchPlanetApsis('Venus', new Date)).time).x,
-            next_apsis_y: Astronomy.BaryState("Venus", Astronomy.NextPlanetApsis('Venus', Astronomy.SearchPlanetApsis('Venus', new Date)).time).y,
+            x: Astronomy.HelioVector("Venus", new Date()).x,
+            y: Astronomy.HelioVector("Venus", new Date()).y,
+            apsis_x: Astronomy.HelioVector("Venus", Astronomy.SearchPlanetApsis('Venus', new Date).time).x,
+            apsis_y: Astronomy.HelioVector("Venus", Astronomy.SearchPlanetApsis('Venus', new Date).time).y,
+            next_apsis_x: Astronomy.HelioVector("Venus", Astronomy.NextPlanetApsis('Venus', Astronomy.SearchPlanetApsis('Venus', new Date)).time).x,
+            next_apsis_y: Astronomy.HelioVector("Venus", Astronomy.NextPlanetApsis('Venus', Astronomy.SearchPlanetApsis('Venus', new Date)).time).y,
+            apsis: ()=>{
+                let apsis = Astronomy.SearchPlanetApsis('Venus', new Date),
+                    next_apsis = Astronomy.NextPlanetApsis('Venus', Astronomy.SearchPlanetApsis('Venus', new Date));
+
+                return {
+                    [apsis.kind]: {
+                        x: Astronomy.HelioVector("Venus", apsis.time).x * this.DELTA_ORBIT_RAD + SUN_OPTS.x,
+                        y: Astronomy.HelioVector("Venus", apsis.time).y * this.DELTA_ORBIT_RAD + SUN_OPTS.y,
+                        dist_au: apsis.dist_au * this.DELTA_ORBIT_RAD,
+                    },
+                    [next_apsis.kind]: {
+                        x: Astronomy.HelioVector("Venus", next_apsis.time).x * this.DELTA_ORBIT_RAD + SUN_OPTS.x,
+                        y: Astronomy.HelioVector("Venus", next_apsis.time).y * this.DELTA_ORBIT_RAD + SUN_OPTS.y,
+                        dist_au: next_apsis.dist_au * this.DELTA_ORBIT_RAD,
+                    },
+                }
+            }
+        
         },
         {
             name: 'Earth',
             color: '#43c6ac',
             size: 5,
             orbitalDistance: 70,
-            x: Astronomy.BaryState("Earth", new Date()).x,
-            y: Astronomy.BaryState("Earth", new Date()).y,
-            apsis_x: Astronomy.BaryState("Earth", Astronomy.SearchPlanetApsis('Earth', new Date).time).x,
-            apsis_y: Astronomy.BaryState("Earth", Astronomy.SearchPlanetApsis('Earth', new Date).time).y,
-            next_apsis_x: Astronomy.BaryState("Earth", Astronomy.NextPlanetApsis('Earth', Astronomy.SearchPlanetApsis('Earth', new Date)).time).x,
-            next_apsis_y: Astronomy.BaryState("Earth", Astronomy.NextPlanetApsis('Earth', Astronomy.SearchPlanetApsis('Earth', new Date)).time).y,
+            x: Astronomy.HelioVector("Earth", new Date()).x,
+            y: Astronomy.HelioVector("Earth", new Date()).y,
+            apsis_x: Astronomy.HelioVector("Earth", Astronomy.SearchPlanetApsis('Earth', new Date).time).x,
+            apsis_y: Astronomy.HelioVector("Earth", Astronomy.SearchPlanetApsis('Earth', new Date).time).y,
+            next_apsis_x: Astronomy.HelioVector("Earth", Astronomy.NextPlanetApsis('Earth', Astronomy.SearchPlanetApsis('Earth', new Date)).time).x,
+            next_apsis_y: Astronomy.HelioVector("Earth", Astronomy.NextPlanetApsis('Earth', Astronomy.SearchPlanetApsis('Earth', new Date)).time).y,
+            apsis: ()=>{
+                let apsis = Astronomy.SearchPlanetApsis('Earth', new Date),
+                    next_apsis = Astronomy.NextPlanetApsis('Earth', apsis);
 
+                return {
+                    [apsis.kind]: {
+                        x: Astronomy.HelioVector("Earth", apsis.time).x * this.DELTA_ORBIT_RAD + SUN_OPTS.x,
+                        y: Astronomy.HelioVector("Earth", apsis.time).y * this.DELTA_ORBIT_RAD + SUN_OPTS.y,
+                        dist_au: apsis.dist_au * this.DELTA_ORBIT_RAD,
+                    },
+                    [next_apsis.kind]: {
+                        x: Astronomy.HelioVector("Earth", next_apsis.time).x * this.DELTA_ORBIT_RAD + SUN_OPTS.x,
+                        y: Astronomy.HelioVector("Earth", next_apsis.time).y * this.DELTA_ORBIT_RAD + SUN_OPTS.y,
+                        dist_au: next_apsis.dist_au * this.DELTA_ORBIT_RAD,
+                    },
+                }
+            }
         },
         {
             name: 'Mars',
             color: '#EB5757',
             size: 2.6,
             orbitalDistance: 90,
-            x: Astronomy.BaryState("Mars", new Date()).x,
-            y: Astronomy.BaryState("Mars", new Date()).y,
-            apsis_x: Astronomy.BaryState("Mars", Astronomy.SearchPlanetApsis('Mars', new Date).time).x,
-            apsis_y: Astronomy.BaryState("Mars", Astronomy.SearchPlanetApsis('Mars', new Date).time).y,
-            next_apsis_x: Astronomy.BaryState("Mars", Astronomy.NextPlanetApsis('Mars', Astronomy.SearchPlanetApsis('Mars', new Date)).time).x,
-            next_apsis_y: Astronomy.BaryState("Mars", Astronomy.NextPlanetApsis('Mars', Astronomy.SearchPlanetApsis('Mars', new Date)).time).y,
+            x: Astronomy.HelioVector("Mars", new Date()).x,
+            y: Astronomy.HelioVector("Mars", new Date()).y,
+            apsis_x: Astronomy.HelioVector("Mars", Astronomy.SearchPlanetApsis('Mars', new Date).time).x,
+            apsis_y: Astronomy.HelioVector("Mars", Astronomy.SearchPlanetApsis('Mars', new Date).time).y,
+            next_apsis_x: Astronomy.HelioVector("Mars", Astronomy.NextPlanetApsis('Mars', Astronomy.SearchPlanetApsis('Mars', new Date)).time).x,
+            next_apsis_y: Astronomy.HelioVector("Mars", Astronomy.NextPlanetApsis('Mars', Astronomy.SearchPlanetApsis('Mars', new Date)).time).y,
+            apsis: ()=>{
+                let apsis = Astronomy.SearchPlanetApsis('Mars', new Date),
+                    next_apsis = Astronomy.NextPlanetApsis('Mars', apsis);
 
+                return {
+                    [apsis.kind]: {
+                        x: Astronomy.HelioVector("Mars", apsis.time).x * this.DELTA_ORBIT_RAD + SUN_OPTS.x,
+                        y: Astronomy.HelioVector("Mars", apsis.time).y * this.DELTA_ORBIT_RAD + SUN_OPTS.y,
+                        dist_au: apsis.dist_au * this.DELTA_ORBIT_RAD,
+                    },
+                    [next_apsis.kind]: {
+                        x: Astronomy.HelioVector("Mars", next_apsis.time).x * this.DELTA_ORBIT_RAD + SUN_OPTS.x,
+                        y: Astronomy.HelioVector("Mars", next_apsis.time).y * this.DELTA_ORBIT_RAD + SUN_OPTS.y,
+                        dist_au: next_apsis.dist_au * this.DELTA_ORBIT_RAD,
+                    },
+                }
+            }
         },
         {
             name: 'Jupiter',
@@ -69,6 +137,23 @@ export default class SolarSystem{
             orbitalDistance: 116,
             x: Astronomy.HelioVector("Jupiter", new Date, false).x,
             y: Astronomy.HelioVector("Jupiter", new Date, false).y,
+            apsis: ()=>{
+                let apsis = Astronomy.SearchPlanetApsis('Jupiter', new Date),
+                    next_apsis = Astronomy.NextPlanetApsis('Jupiter', apsis);
+
+                return {
+                    [apsis.kind]: {
+                        x: Astronomy.HelioVector("Jupiter", apsis.time).x * this.DELTA_ORBIT_RAD + SUN_OPTS.x,
+                        y: Astronomy.HelioVector("Jupiter", apsis.time).y * this.DELTA_ORBIT_RAD + SUN_OPTS.y,
+                        dist_au: apsis.dist_au * this.DELTA_ORBIT_RAD,
+                    },
+                    [next_apsis.kind]: {
+                        x: Astronomy.HelioVector("Jupiter", next_apsis.time).x * this.DELTA_ORBIT_RAD + SUN_OPTS.x,
+                        y: Astronomy.HelioVector("Jupiter", next_apsis.time).y * this.DELTA_ORBIT_RAD + SUN_OPTS.y,
+                        dist_au: next_apsis.dist_au * this.DELTA_ORBIT_RAD,
+                    },
+                }
+            }
         },
         {
             name: 'Saturn',
@@ -77,6 +162,23 @@ export default class SolarSystem{
             orbitalDistance: 156,
             x: Astronomy.HelioVector("Saturn", new Date, false).x,
             y: Astronomy.HelioVector("Saturn", new Date, false).y,
+            apsis: ()=>{
+                let apsis = Astronomy.SearchPlanetApsis('Saturn', new Date),
+                    next_apsis = Astronomy.NextPlanetApsis('Saturn', apsis);
+
+                return {
+                    [apsis.kind]: {
+                        x: Astronomy.HelioVector("Saturn", apsis.time).x * this.DELTA_ORBIT_RAD + SUN_OPTS.x,
+                        y: Astronomy.HelioVector("Saturn", apsis.time).y * this.DELTA_ORBIT_RAD + SUN_OPTS.y,
+                        dist_au: apsis.dist_au * this.DELTA_ORBIT_RAD,
+                    },
+                    [next_apsis.kind]: {
+                        x: Astronomy.HelioVector("Saturn", next_apsis.time).x * this.DELTA_ORBIT_RAD + SUN_OPTS.x,
+                        y: Astronomy.HelioVector("Saturn", next_apsis.time).y * this.DELTA_ORBIT_RAD + SUN_OPTS.y,
+                        dist_au: next_apsis.dist_au * this.DELTA_ORBIT_RAD,
+                    },
+                }
+            }
         },
         {
             name: 'Uranus',
@@ -85,6 +187,23 @@ export default class SolarSystem{
             orbitalDistance: 195,
             x: Astronomy.HelioVector("Uranus", new Date, false).x,
             y: Astronomy.HelioVector("Uranus", new Date, false).y,
+            apsis: ()=>{
+                let apsis = Astronomy.SearchPlanetApsis('Uranus', new Date),
+                    next_apsis = Astronomy.NextPlanetApsis('Uranus', apsis);
+
+                return {
+                    [apsis.kind]: {
+                        x: Astronomy.HelioVector("Uranus", apsis.time).x * this.DELTA_ORBIT_RAD + SUN_OPTS.x,
+                        y: Astronomy.HelioVector("Uranus", apsis.time).y * this.DELTA_ORBIT_RAD + SUN_OPTS.y,
+                        dist_au: apsis.dist_au * this.DELTA_ORBIT_RAD,
+                    },
+                    [next_apsis.kind]: {
+                        x: Astronomy.HelioVector("Uranus", next_apsis.time).x * this.DELTA_ORBIT_RAD + SUN_OPTS.x,
+                        y: Astronomy.HelioVector("Uranus", next_apsis.time).y * this.DELTA_ORBIT_RAD + SUN_OPTS.y,
+                        dist_au: next_apsis.dist_au * this.DELTA_ORBIT_RAD,
+                    },
+                }
+            }
         },
         {
             name: 'Neptune',
@@ -93,6 +212,23 @@ export default class SolarSystem{
             orbitalDistance: 220,
             x: Astronomy.HelioVector("Neptune", new Date, false).x,
             y: Astronomy.HelioVector("Neptune", new Date, false).y,
+            apsis: ()=>{
+                let apsis = Astronomy.SearchPlanetApsis('Neptune', new Date),
+                    next_apsis = Astronomy.NextPlanetApsis('Neptune', apsis);
+
+                return {
+                    [apsis.kind]: {
+                        x: Astronomy.HelioVector("Neptune", apsis.time).x * this.DELTA_ORBIT_RAD + SUN_OPTS.x,
+                        y: Astronomy.HelioVector("Neptune", apsis.time).y * this.DELTA_ORBIT_RAD + SUN_OPTS.y,
+                        dist_au: apsis.dist_au * this.DELTA_ORBIT_RAD,
+                    },
+                    [next_apsis.kind]: {
+                        x: Astronomy.HelioVector("Neptune", next_apsis.time).x * this.DELTA_ORBIT_RAD + SUN_OPTS.x,
+                        y: Astronomy.HelioVector("Neptune", next_apsis.time).y * this.DELTA_ORBIT_RAD + SUN_OPTS.y,
+                        dist_au: next_apsis.dist_au * this.DELTA_ORBIT_RAD,
+                    },
+                }
+            }
         },
         {
             name: 'Pluto',
@@ -190,7 +326,8 @@ export default class SolarSystem{
                         apsis_x: elem.apsis_x * this.DELTA_ORBIT_RAD + SUN_OPTS.x || false,
                         apsis_y: elem.apsis_y * this.DELTA_ORBIT_RAD + SUN_OPTS.y || false,
                         next_apsis_x: elem.next_apsis_x * this.DELTA_ORBIT_RAD + SUN_OPTS.x || false,
-                        next_apsis_y: elem.next_apsis_y * this.DELTA_ORBIT_RAD + SUN_OPTS.x || false,
+                        next_apsis_y: elem.next_apsis_y * this.DELTA_ORBIT_RAD + SUN_OPTS.y || false,
+                        apsis: elem.apsis ? elem.apsis() : false,
 
                         center: this.center || false
                     }

@@ -54,15 +54,15 @@ export default class Planet {
     }
     render_apsis(){
             if(this.apsis != false){
-                this.ctx.save();
-                this.ctx.beginPath();
-                this.ctx.moveTo(this.apsis[1].x, this.apsis[1].y);
-                this.ctx.lineTo(this.orbit_props.x, this.orbit_props.y);
-                this.ctx.lineWidth = 2;
-                this.ctx.strokeStyle = this.color;
-                this.ctx.stroke();
-                this.ctx.closePath();
-                this.ctx.restore();
+                // this.ctx.save();
+                // this.ctx.beginPath();
+                // this.ctx.moveTo(this.apsis[1].x, this.apsis[1].y);
+                // this.ctx.lineTo(this.orbit_props.x, this.orbit_props.y);
+                // this.ctx.lineWidth = 2;
+                // this.ctx.strokeStyle = this.color;
+                // this.ctx.stroke();
+                // this.ctx.closePath();
+                // this.ctx.restore();
 
                     this.ctx.save();
                     this.ctx.beginPath();

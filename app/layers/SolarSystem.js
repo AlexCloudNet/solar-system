@@ -344,7 +344,7 @@ export default class SolarSystem{
             planet.render_planet();
             planet.render_apsis();
             planet.render_orbit();
-            planet.render_name();
+            // planet.render_name();
         })
     }
 

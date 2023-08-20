@@ -49,6 +49,7 @@ stars_fields.render();
 let scrollIcon = document.querySelector('.mouse');
 window.addEventListener('wheel', mouseScrollIcon);
 
+
 function mouseScrollIcon(){
     setTimeout(()=>{
         scrollIcon.style.display = "none";

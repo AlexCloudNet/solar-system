@@ -11,7 +11,7 @@ import {
 import Planet from "../objects/Planet.js";
 
 export default class SolarSystem{
-
+    date_now = new Date;
     planetsOpts = [
         {
             name: 'Mercury',
@@ -20,6 +20,7 @@ export default class SolarSystem{
             orbitalDistance: 36,
             x: Astronomy.HelioVector("Mercury", new Date).x,
             y: Astronomy.HelioVector("Mercury", new Date).y,
+            distance: Astronomy.HelioDistance('Mercury', new Date),
         },
         {
             name: 'Venus',
@@ -28,6 +29,7 @@ export default class SolarSystem{
             orbitalDistance: 50,
             x: Astronomy.HelioVector("Venus", new Date).x,
             y: Astronomy.HelioVector("Venus", new Date).y,
+            distance: Astronomy.HelioDistance('Venus', new Date),
         },
         {
             name: 'Earth',
@@ -36,6 +38,7 @@ export default class SolarSystem{
             orbitalDistance: 70,
             x: Astronomy.HelioVector("Earth", new Date).x,
             y: Astronomy.HelioVector("Earth", new Date).y,
+            distance: Astronomy.HelioDistance('Earth', new Date),
         },
         {
             name: 'Mars',
@@ -44,6 +47,7 @@ export default class SolarSystem{
             orbitalDistance: 90,
             x: Astronomy.HelioVector("Mars", new Date).x,
             y: Astronomy.HelioVector("Mars", new Date).y,
+            distance: Astronomy.HelioDistance('Mars', new Date),
         },
         {
             name: 'Jupiter',
@@ -52,6 +56,7 @@ export default class SolarSystem{
             orbitalDistance: 116,
             x: Astronomy.HelioVector("Jupiter", new Date).x,
             y: Astronomy.HelioVector("Jupiter", new Date).y,
+            distance: Astronomy.HelioDistance('Jupiter', new Date),
         },
         {
             name: 'Saturn',
@@ -60,6 +65,7 @@ export default class SolarSystem{
             orbitalDistance: 156,
             x: Astronomy.HelioVector("Saturn", new Date).x,
             y: Astronomy.HelioVector("Saturn", new Date).y,
+            distance: Astronomy.HelioDistance('Saturn', new Date),
         },
         {
             name: 'Uranus',
@@ -68,6 +74,7 @@ export default class SolarSystem{
             orbitalDistance: 195,
             x: Astronomy.HelioVector("Uranus", new Date).x,
             y: Astronomy.HelioVector("Uranus", new Date).y,
+            distance: Astronomy.HelioDistance('Uranus', new Date),
         },
         {
             name: 'Neptune',
@@ -76,6 +83,7 @@ export default class SolarSystem{
             orbitalDistance: 220,
             x: Astronomy.HelioVector("Neptune", new Date).x,
             y: Astronomy.HelioVector("Neptune", new Date).y,
+            distance: Astronomy.HelioDistance('Neptune', new Date),
         },
         {
             name: 'Pluto',
@@ -84,6 +92,7 @@ export default class SolarSystem{
             orbitalDistance: 240,
             x: Astronomy.HelioVector("Pluto", new Date).x,
             y: Astronomy.HelioVector("Pluto", new Date).y,
+            distance: Astronomy.HelioDistance('Pluto', new Date),
         },
         
         
@@ -96,8 +105,12 @@ export default class SolarSystem{
         this.BIG_ORBIT_FLAG = 1;
 
         this.planetsArr = this.get_planets_opts();
+        this.select_planets = [];
+        this.mouse = {x:0, y:0};
         window.addEventListener('wheel', this.scrollResize.bind(this));
+        window.addEventListener('click', this.mouseclick.bind(this));
 
+        
     }
 
 
@@ -115,6 +128,7 @@ export default class SolarSystem{
                         name: elem.name,
                         color: elem.color,
                         rad: elem.size,
+                        dist: elem.distance,
                         orbit: Math.hypot(catX, catY),
                         ctx: this.ctx,
                         BIG_ORBIT_FLAG: this.BIG_ORBIT_FLAG,
@@ -132,7 +146,35 @@ export default class SolarSystem{
             planet.render_planet();
             planet.render_orbit();
             planet.render_name();
+            planet.select = false;
         })
+        this.select_planets.forEach(planet => {
+            planet.select = true;
+        })
+    }
+    
+    mouseclick(e){
+        this.mouse.x = e.x;
+        this.mouse.y = e.y;
+        let planet_count = 0;
+        for (let i = 0; i < this.planetsArr.length; i++) {
+            const planet = this.planetsArr[i];
+
+            let dist_point = (e.x - planet.x) * (e.x - planet.x) + (e.y - planet.y) * (e.y - planet.y);
+            let rad = planet.rad*planet.rad;
+            if(dist_point < rad){
+                planet_count++;
+                if(this.select_planets.length > 0){
+                    this.select_planets[1] = planet;
+                    // planet.select = true;
+                }
+                if(this.select_planets.length == 0){
+                    this.select_planets[0] = planet;
+                    // planet.select = true;
+                }
+            }
+        }
+        if(planet_count == 0) this.select_planets.length = 0;
     }
 
     scrollResize(event){

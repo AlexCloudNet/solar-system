@@ -1,10 +1,11 @@
 import { SUN_OPTS } from "../../opts";
-
+import { AU } from "../../opts";
 export default class Planet {
     constructor(opts){
         this.ctx = opts.ctx;
         this.x = opts.x;
         this.y = opts.y;
+        this.au = opts.au;
         this.rad = opts.rad;
         this.dist = opts.dist;
         this.color = opts.color;
@@ -13,7 +14,9 @@ export default class Planet {
 
         this.ctx.font = "bold 24px sans-serif";
         this.name_width = this.ctx.measureText(this.name).width;
+        
         this.select = false;
+        this.relation = {dist:{},angle:{},};
         this.BIG_ORBIT_FLAG = opts.BIG_ORBIT_FLAG;
     }
 
@@ -59,7 +62,7 @@ export default class Planet {
             this.ctx.font = "12px sans-serif";
             this.ctx.fillStyle = this.color;
             this.ctx.fillText(this.dist + ' AU', this.x+this.rad+20+this.name_width, this.y - this.rad-20);
-            this.ctx.fillText(this.dist*150 + ' mil km', this.x+this.rad+20+this.name_width, this.y - this.rad-30);
+            this.ctx.fillText((this.dist*AU).toLocaleString("de-DE") + ' mil km', this.x+this.rad+20+this.name_width, this.y - this.rad-30);
             this.ctx.restore();
         }
     }
@@ -92,6 +95,23 @@ export default class Planet {
                 this.ctx.fillStyle = this.color;
                 this.ctx.fillText(this.name, this.x + this.rad + 10, this.y - this.rad - 10);
         }
+    }
+
+    render_distance(planet_2){
+        this.ctx.beginPath();
+        this.ctx.moveTo(this.x, this.y);
+        this.ctx.lineTo(planet_2.x, planet_2.y);
+        this.ctx.lineWidth = 2;
+        this.ctx.strokeStyle = this.color;
+        this.ctx.stroke();
+        this.ctx.closePath();
+        this.ctx.font = "12px sans-serif";
+        this.ctx.fillStyle = this.color;
+        this.ctx.fillText((this.relation.dist[planet_2.name]*AU).toLocaleString("de-DE") + ' km', 
+        200, 100
+        // this.x + Math.cos(this.relation.angle[planet_2.name]) * (this.relation.dist[planet_2.name]/2),
+        // this.y + Math.sin(this.relation.angle[planet_2.name]) * (this.relation.dist[planet_2.name]/2),
+        );
     }
 
 

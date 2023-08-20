@@ -20,6 +20,7 @@ export default class SolarSystem{
             orbitalDistance: 36,
             x: Astronomy.HelioVector("Mercury", new Date).x,
             y: Astronomy.HelioVector("Mercury", new Date).y,
+            z: Astronomy.HelioVector("Mercury", new Date).z,
             distance: Astronomy.HelioDistance('Mercury', new Date),
         },
         {
@@ -29,6 +30,7 @@ export default class SolarSystem{
             orbitalDistance: 50,
             x: Astronomy.HelioVector("Venus", new Date).x,
             y: Astronomy.HelioVector("Venus", new Date).y,
+            z: Astronomy.HelioVector("Venus", new Date).z,
             distance: Astronomy.HelioDistance('Venus', new Date),
         },
         {
@@ -38,6 +40,7 @@ export default class SolarSystem{
             orbitalDistance: 70,
             x: Astronomy.HelioVector("Earth", new Date).x,
             y: Astronomy.HelioVector("Earth", new Date).y,
+            z: Astronomy.HelioVector("Earth", new Date).z,
             distance: Astronomy.HelioDistance('Earth', new Date),
         },
         {
@@ -47,6 +50,7 @@ export default class SolarSystem{
             orbitalDistance: 90,
             x: Astronomy.HelioVector("Mars", new Date).x,
             y: Astronomy.HelioVector("Mars", new Date).y,
+            z: Astronomy.HelioVector("Mars", new Date).z,
             distance: Astronomy.HelioDistance('Mars', new Date),
         },
         {
@@ -56,6 +60,7 @@ export default class SolarSystem{
             orbitalDistance: 116,
             x: Astronomy.HelioVector("Jupiter", new Date).x,
             y: Astronomy.HelioVector("Jupiter", new Date).y,
+            z: Astronomy.HelioVector("Jupiter", new Date).z,
             distance: Astronomy.HelioDistance('Jupiter', new Date),
         },
         {
@@ -65,6 +70,7 @@ export default class SolarSystem{
             orbitalDistance: 156,
             x: Astronomy.HelioVector("Saturn", new Date).x,
             y: Astronomy.HelioVector("Saturn", new Date).y,
+            z: Astronomy.HelioVector("Saturn", new Date).z,
             distance: Astronomy.HelioDistance('Saturn', new Date),
         },
         {
@@ -74,6 +80,7 @@ export default class SolarSystem{
             orbitalDistance: 195,
             x: Astronomy.HelioVector("Uranus", new Date).x,
             y: Astronomy.HelioVector("Uranus", new Date).y,
+            z: Astronomy.HelioVector("Uranus", new Date).z,
             distance: Astronomy.HelioDistance('Uranus', new Date),
         },
         {
@@ -83,6 +90,7 @@ export default class SolarSystem{
             orbitalDistance: 220,
             x: Astronomy.HelioVector("Neptune", new Date).x,
             y: Astronomy.HelioVector("Neptune", new Date).y,
+            z: Astronomy.HelioVector("Neptune", new Date).z,
             distance: Astronomy.HelioDistance('Neptune', new Date),
         },
         {
@@ -92,6 +100,7 @@ export default class SolarSystem{
             orbitalDistance: 240,
             x: Astronomy.HelioVector("Pluto", new Date).x,
             y: Astronomy.HelioVector("Pluto", new Date).y,
+            z: Astronomy.HelioVector("Pluto", new Date).z,
             distance: Astronomy.HelioDistance('Pluto', new Date),
         },
         
@@ -106,6 +115,8 @@ export default class SolarSystem{
 
         this.planetsArr = this.get_planets_opts();
         this.select_planets = [];
+
+
         this.mouse = {x:0, y:0};
         window.addEventListener('wheel', this.scrollResize.bind(this));
         window.addEventListener('click', this.mouseclick.bind(this));
@@ -125,6 +136,7 @@ export default class SolarSystem{
                     {
                         x: elem.x * this.DELTA_ORBIT_RAD + SUN_OPTS.x,
                         y: elem.y * this.DELTA_ORBIT_RAD + SUN_OPTS.y,
+                        au:{x:elem.x, y:elem.y, z:elem.z},
                         name: elem.name,
                         color: elem.color,
                         rad: elem.size,
@@ -151,6 +163,7 @@ export default class SolarSystem{
         this.select_planets.forEach(planet => {
             planet.select = true;
         })
+        if(this.select_planets.length > 1) this.select_planets[0].render_distance(this.select_planets[1]);
     }
     
     mouseclick(e){
@@ -166,7 +179,7 @@ export default class SolarSystem{
                 planet_count++;
                 if(this.select_planets.length > 0){
                     this.select_planets[1] = planet;
-                    // planet.select = true;
+                    this.get_planets_relation()
                 }
                 if(this.select_planets.length == 0){
                     this.select_planets[0] = planet;
@@ -176,6 +189,25 @@ export default class SolarSystem{
         }
         if(planet_count == 0) this.select_planets.length = 0;
     }
+    get_planets_relation(){
+        let planet_1 = this.select_planets[0],
+            planet_2 = this.select_planets[1];
+        if(this.select_planets[0].relation.dist[planet_2.name]) return;
+        
+        let vector = {};
+            vector.x = planet_1.au.x - planet_2.au.x;
+            vector.y = planet_1.au.y - planet_2.au.y;
+            vector.z = planet_1.au.z - planet_2.au.z;
+        let vec_len = Math.sqrt(vector.x*vector.x + vector.y*vector.y + vector.z*vector.z)
+        // let vec_angle = Math.atan2(vector.y, vector.x);
+
+        this.select_planets[0].relation.dist[planet_2.name] = vec_len;
+        this.select_planets[1].relation.dist[planet_1.name] = vec_len;
+
+        // this.select_planets[0].relation.angle[planet_2.name] = vec_angle;
+        // this.select_planets[1].relation.angle[planet_1.name] = vec_angle;
+    }
+
 
     scrollResize(event){
         if(event.deltaY < 0){

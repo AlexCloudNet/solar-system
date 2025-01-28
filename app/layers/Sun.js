@@ -4,7 +4,7 @@ export default class Sun{
     constructor(ctx){
         
         this.ctx = ctx
-        this.linearGradient = this.ctx.createLinearGradient(287.5, 287.5, 312.5, 312.5);
+        this.linearGradient = this.ctx.createLinearGradient(-287.5, -287.5, -312.5, -312.5);
         this.linearGradient.addColorStop(0, '#f12711');
         this.linearGradient.addColorStop(1, '#f5af19');
     }

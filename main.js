@@ -1,5 +1,6 @@
 import Stats from "stats.js";
 
+import { Viewport } from "./app/engine/Viewport";
 import Stars from "./app/layers/Stars";
 import Sun from "./app/layers/Sun";
 import SolarSystem from "./app/layers/SolarSystem";
@@ -17,7 +18,7 @@ let ctx_s = canvas_stars.getContext('2d');
 let w = canvas.width = canvas_stars.width = window.innerWidth,
     h = canvas.height = canvas_stars.height = window.innerHeight;
 
-
+const viewport = new Viewport(canvas);
 
 const stars_fields = new Stars(ctx_s);
 stars_fields.render();
@@ -30,10 +31,15 @@ requestAnimationFrame(draw);
 function draw(){
     stats.begin();
     ctx.clearRect(0, 0, w, h);
-
+    ctx.save();
+    ctx.translate(viewport.center.x, viewport.center.y);
+    ctx.scale(1/viewport.zoom, 1/viewport.zoom);
+    const offset = viewport.getOffset();
+    ctx.translate(offset.x, offset.y);
     solar_system.render();
     sun.render();
 
+    ctx.restore();
     stats.end();
     requestAnimationFrame(draw);
 }

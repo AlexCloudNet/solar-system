@@ -118,8 +118,8 @@ export default class SolarSystem{
 
 
         this.mouse = {x:0, y:0};
-        window.addEventListener('wheel', this.scrollResize.bind(this));
-        window.addEventListener('click', this.mouseclick.bind(this));
+        // window.addEventListener('wheel', this.scrollResize.bind(this));
+        // window.addEventListener('click', this.mouseclick.bind(this));
 
         
     }

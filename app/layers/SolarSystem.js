@@ -209,42 +209,6 @@ export default class SolarSystem{
     }
 
 
-    scrollResize(event){
-        if(event.deltaY < 0){
-            if(this.DELTA_ORBIT_RAD >= 180){
-                    this.DELTA_ORBIT_RAD+=20;
-            }else{
-                if(this.DELTA_ORBIT_RAD < 80){
-                        this.DELTA_ORBIT_RAD+=2;
-                }else{
-                        this.DELTA_ORBIT_RAD+=10;
-                }
-            }
-
-            if(this.DELTA_ORBIT_RAD >= 66) SUN_OPTS.rad+=1;
-
-        }else{
-            if(this.DELTA_ORBIT_RAD <= 10) return;
-            if(this.DELTA_ORBIT_RAD > 180){
-                    this.DELTA_ORBIT_RAD-=20;
-            }else{
-                if(this.DELTA_ORBIT_RAD <= 80){
-                        this.DELTA_ORBIT_RAD-=2;
-                }else{
-                        this.DELTA_ORBIT_RAD-=10;
-                }
-            }
     
-            if(SUN_OPTS.rad <=1) {
-                SUN_OPTS.rad=1;
-            }else{
-                SUN_OPTS.rad-=1;
-            }
-        }
-    
-        this.DELTA_ORBIT_RAD <= 50? this.BIG_ORBIT_FLAG = 0: this.BIG_ORBIT_FLAG = 1;
-        this.planetsArr = this.get_planets_opts();
-    }
-
 
 }

@@ -18,7 +18,7 @@ let ctx_s = canvas_stars.getContext('2d');
 let w = canvas.width = canvas_stars.width = window.innerWidth,
     h = canvas.height = canvas_stars.height = window.innerHeight;
 const render_opts ={
-    zoom_font: false,
+    zoom_font: 1,
 }
 
 const viewport = new Viewport(canvas, render_opts);
@@ -41,8 +41,7 @@ function draw(){
     const offset = viewport.getOffset();
     ctx.translate(offset.x, offset.y);
 
-    if(viewport.zoom >= 2 ) render_opts.zoom_font = true;
-    else render_opts.zoom_font = false;
+    render_opts.zoom_font = viewport.zoom;
 
     solar_system.render(render_opts);
     sun.render();

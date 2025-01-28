@@ -17,14 +17,18 @@ let ctx_s = canvas_stars.getContext('2d');
 
 let w = canvas.width = canvas_stars.width = window.innerWidth,
     h = canvas.height = canvas_stars.height = window.innerHeight;
+const render_opts ={
+    zoom_font: false,
+}
 
-const viewport = new Viewport(canvas);
+const viewport = new Viewport(canvas, render_opts);
 
 const stars_fields = new Stars(ctx_s);
 stars_fields.render();
 
 const sun = new Sun(ctx);
 const solar_system = new SolarSystem(ctx)
+
 
 
 requestAnimationFrame(draw);
@@ -36,7 +40,11 @@ function draw(){
     ctx.scale(1/viewport.zoom, 1/viewport.zoom);
     const offset = viewport.getOffset();
     ctx.translate(offset.x, offset.y);
-    solar_system.render();
+
+    if(viewport.zoom >= 2 ) render_opts.zoom_font = true;
+    else render_opts.zoom_font = false;
+
+    solar_system.render(render_opts);
     sun.render();
 
     ctx.restore();
@@ -53,9 +61,18 @@ stars_fields.render();
 })
 
 let scrollIcon = document.querySelector('.mouse');
+let clickIcon = document.querySelector('.mouse_click');
+
 window.addEventListener('wheel', mouseScrollIcon);
+window.addEventListener('mousedown', mouseDownIcon);
 
 
+function mouseDownIcon(){
+    setTimeout(()=>{
+        clickIcon.style.display = "none";
+    }, 2000);
+    window.removeEventListener('mousedown', mouseDownIcon);
+}
 function mouseScrollIcon(){
     setTimeout(()=>{
         scrollIcon.style.display = "none";

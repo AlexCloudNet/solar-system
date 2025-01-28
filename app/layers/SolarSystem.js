@@ -153,11 +153,11 @@ export default class SolarSystem{
         return planetsArr;
     }
 
-    render(){
+    render(render_opts){
         this.planetsArr.forEach(planet => {
             planet.render_planet();
             planet.render_orbit();
-            planet.render_name();
+            planet.render_name(render_opts);
             planet.select = false;
         })
         this.select_planets.forEach(planet => {

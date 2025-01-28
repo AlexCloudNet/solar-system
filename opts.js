@@ -7,11 +7,12 @@ const SUN_OPTS = {
 let BIG_ORBIT_FLAG = 1;
 let DELTA_ORBIT_RAD = 150;
 let STARS_COUNT = 100;
-let AU = 149_597_870.7
+let AU = 149_597_870.7;
+
 export {
     SUN_OPTS,
     AU,
     BIG_ORBIT_FLAG,
     DELTA_ORBIT_RAD,
-    STARS_COUNT
+    STARS_COUNT,
 };

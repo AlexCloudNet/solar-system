@@ -24,9 +24,11 @@ body{
 .field {
   position: absolute;
   width: 80%;
+  height: 30%;
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
 }
 .mouse {
   width: 50px;
@@ -49,6 +51,43 @@ body{
     animation: wheel 2s infinite;
     -webkit-animation: wheel 2s infinite alternate;
 }
+.mouse_click {
+  width: 50px;
+  height: 90px;
+  border: 3px solid #ffffff;
+  border-radius: 60px;
+  position: relative;
+}
+.mouse_click::before {
+  content: '';
+  width: 20px;
+  height: 25px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  border-top-left-radius: 70%;
+  background-color: #ffffff;
+  opacity: 1;
+}
+.arrow_left {
+  width: 0;
+	height: 0;
+  transform: translate(-150%, 50%);
+	border-top: 20px solid transparent;
+	border-right: 20px solid #ffffff;
+	border-bottom: 20px solid transparent;
+}
+.arrow_right {
+  width: 0;
+	height: 0;
+  transform: translate(270%, -50%);
+	border-top: 20px solid transparent;
+	border-left: 20px solid #ffffff;
+	border-bottom: 20px solid transparent;
+}
+
+
+
 
 @keyframes wheel {
   to {

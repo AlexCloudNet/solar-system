@@ -83,7 +83,7 @@ export default class Planet {
         return Math.atan2(y, x) * 180/Math.PI;
     }
 
-    render_name(){
+    render_name(render_opts){
         if(this.name == 'Mercury' || this.name == 'Venus' || this.name == 'Earth' || this.name == 'Mars'){
             if(this.BIG_ORBIT_FLAG){
                 this.ctx.font = "bold 24px sans-serif";
@@ -91,9 +91,14 @@ export default class Planet {
                 this.ctx.fillText(this.name, this.x + this.rad + 10, this.y - this.rad - 10);
             }
         }else{
-            this.ctx.font = "bold 24px sans-serif";
-                this.ctx.fillStyle = this.color;
-                this.ctx.fillText(this.name, this.x + this.rad + 10, this.y - this.rad - 10);
+            if(render_opts.zoom_foont){
+                this.ctx.font = "bold 42px sans-serif";
+                console.log('assdd')
+            }else{ 
+                this.ctx.font = "bold 24px sans-serif";
+            }
+            this.ctx.fillStyle = this.color;
+            this.ctx.fillText(this.name, this.x + this.rad + 10, this.y - this.rad - 10);
         }
     }
 

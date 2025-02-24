@@ -6,4 +6,4 @@ ___
 
 Для нахождения координат использовалась библиотека: [Astronomy Engine](https://github.com/cosinekitty/astronomy) 
 
-Ссылка на [codepen.io](https://codepen.io/Alexcloudnet/pen/ExdNzOv?editors=1010) 
+Ссылка на проект на[gh-pages](https://alexcloudnet.github.io/solar-system/) 
